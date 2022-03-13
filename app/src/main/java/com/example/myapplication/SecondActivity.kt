@@ -2,7 +2,6 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.widget.*
-import android.widget.LinearLayout.LayoutParams
 import androidx.appcompat.app.AppCompatActivity
 
 import diceemu.*
@@ -16,6 +15,30 @@ class SecondActivity : AppCompatActivity() {
 
 
     private var infoToast = InfoToast(this)
+
+    private fun generateDiceTable(diceCount: Int, diceMaxNumber: Int): ArrayList<TextView> {
+        var textViewArray = ArrayList<TextView>()
+
+        val dicePerLine = 8
+
+        var diceCounter = 0
+        var lineCounter = 0
+
+        for (i in 1..diceCount) {
+            var diceValue = Calc().randomNumber(diceMaxNumber)
+            var newTextView = Dice(diceValue).toTextView(this, diceCounter, lineCounter)
+
+            textViewArray.add(newTextView)
+
+            diceCounter++
+            if (diceCounter == dicePerLine) {
+                diceCounter = 0
+                lineCounter++
+            }
+        }
+
+        return textViewArray
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,47 +74,9 @@ class SecondActivity : AppCompatActivity() {
                     infoToast.error("Please fill Maximum number")
                 }
                 else -> {
-                    // diceLayout.removeAllViews()
-
-                    val newTextView = TextView(this)
-
-                    var params: LayoutParams = LayoutParams(
-                        LayoutParams.MATCH_PARENT,
-                        LayoutParams.WRAP_CONTENT
-                    )
-                    params.setMargins(
-                        10 + (diceCounter * 120),
-                        60 + (lineCounter * 120),
-                        10,
-                        10
-                    )
-
-                    newTextView.layoutParams = params
-                    newTextView.textSize = 30f
-                    newTextView.text = Dice(Calc().randomNumber(maxNum)).draw()
-
-
-                    diceLayout.addView(newTextView)
-
-                    diceCounter++
-                    if (diceCounter == dicePerLine) {
-                        diceCounter = 0
-                        lineCounter++
-                    }
-
-                    /*
-                    val newTextView2 = TextView(this)
-
-                    newTextView2.textSize = 30f
-                    newTextView2.text = "newTextView2"
-
-                    diceLayout.addView(newTextView2)
-                    */
-
-                    /* var newLayoutArray = arrayOfNulls<TextView>(diceNum)
-                    for (i in 1..diceNum) newLayoutArray[i] = newTextView
-                    for (i in 1..diceNum) diceLayout.addView(newTextView)
-                     */
+                    diceLayout.removeAllViews()
+                    var textViewDiceArray = generateDiceTable(diceNum, maxNum)
+                    textViewDiceArray.forEach { diceLayout.addView(it) }
                 }
             }
         }
