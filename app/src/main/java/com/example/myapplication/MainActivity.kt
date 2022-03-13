@@ -3,12 +3,11 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import java.util.*
+
+import diceemu.*
 import kotlin.text.toIntOrNull
 
 
@@ -18,6 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var buttonGenerate: Button
     private lateinit var buttonMultiRandom: Button
+
+    private var infoToast = InfoToast(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +41,10 @@ class MainActivity : AppCompatActivity() {
 
             when {
                 maxNum == null -> {
-                    Toast.makeText(this, "Please fill Maximum number", Toast.LENGTH_SHORT).show()
+                    infoToast.error("Please fill Maximum number")
                 }
                 else -> {
-                    randomNumber.text = (Random().nextInt(maxNum) + 1).toString()
+                    randomNumber.text = Calc().randomNumber(maxNum).toString()
                 }
             }
         }

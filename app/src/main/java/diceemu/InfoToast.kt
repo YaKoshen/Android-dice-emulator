@@ -1,4 +1,4 @@
-package infotoast
+package diceemu
 
 import android.content.Context
 import android.view.Gravity
