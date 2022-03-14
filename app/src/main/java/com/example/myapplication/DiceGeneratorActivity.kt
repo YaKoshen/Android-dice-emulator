@@ -6,18 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 
 import diceemu.*
 
-class SecondActivity : AppCompatActivity() {
+class DiceGeneratorActivity : AppCompatActivity() {
     private lateinit var diceNumber: EditText
     private lateinit var maxNumber: TextView
 
     private lateinit var buttonGenerate: Button
     private lateinit var buttonDiceCountPlus: Button
     private lateinit var buttonDiceCountMinus: Button
+    private lateinit var buttonMaxValuePlus: Button
+    private lateinit var buttonMaxValueMinus: Button
 
     private lateinit var diceLayout: FrameLayout
 
     private var infoToast = InfoToast(this)
-    private val minDiceCount = 1
 
     private fun generateDiceTable(diceCount: Int, diceMaxNumber: Int): ArrayList<TextView> {
         var textViewArray = ArrayList<TextView>()
@@ -49,7 +50,7 @@ class SecondActivity : AppCompatActivity() {
 
         when (diceNum) {
             null -> {
-                diceNumber.setText(minDiceCount.toString())
+                diceNumber.setText(MIN_DICE_COUNT.toString())
             }
             else -> {
                 diceNum++
@@ -64,18 +65,48 @@ class SecondActivity : AppCompatActivity() {
 
         when {
             diceNum == null -> {
-                diceNumber.setText(minDiceCount.toString())
+                diceNumber.setText(MIN_DICE_COUNT.toString())
             }
-            diceNum > minDiceCount -> {
+            diceNum > MIN_DICE_COUNT -> {
                 diceNum--
                 diceNumber.setText(diceNum.toString())
             }
         }
     }
 
+    private fun addMaxValue() {
+        var strMaxNum = maxNumber.text.toString()
+        var maxNum = strMaxNum.toIntOrNull()
+
+        when (maxNum) {
+            null -> {
+                maxNumber.setText(MIN_DICE_VALUE.toString())
+            }
+            else -> {
+                maxNum++
+                maxNumber.setText(maxNum.toString())
+            }
+        }
+    }
+
+    private fun removeMaxValue() {
+        var strMaxNum = maxNumber.text.toString()
+        var maxNum = strMaxNum.toIntOrNull()
+
+        when {
+            maxNum == null -> {
+                maxNumber.setText(MIN_DICE_COUNT.toString())
+            }
+            maxNum > MIN_DICE_COUNT -> {
+                maxNum--
+                maxNumber.setText(maxNum.toString())
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(R.layout.activity_dice_generaor)
 
         // Init GUI elements
         diceNumber = findViewById<EditText>(R.id.editTextDiceNumber)
@@ -86,6 +117,9 @@ class SecondActivity : AppCompatActivity() {
         buttonGenerate = findViewById<Button>(R.id.buttonGenerateDice)
         buttonDiceCountPlus = findViewById<Button>(R.id.buttonDiceCountPlus)
         buttonDiceCountMinus = findViewById<Button>(R.id.buttonDiceCountMinus)
+
+        buttonMaxValuePlus = findViewById<Button>(R.id.buttonMaxValuePlus)
+        buttonMaxValueMinus = findViewById<Button>(R.id.buttonMaxValueMinus)
 
         // Set defaults
         diceNumber.setText(DEFAULT_MAX_VALUE.toString())
@@ -123,6 +157,9 @@ class SecondActivity : AppCompatActivity() {
 
         buttonDiceCountPlus.setOnClickListener { addDice() }
         buttonDiceCountMinus.setOnClickListener { removeDice() }
+
+        buttonMaxValuePlus.setOnClickListener { addMaxValue() }
+        buttonMaxValueMinus.setOnClickListener { removeMaxValue() }
 
     }
 }
