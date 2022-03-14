@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".SecondActivity">
 
+    <Button
+        android:id="@+id/buttonGenerateDice"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="generateRandomNumber"
+        android:text="⚄ GENERATE ⚄"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextDiceNumber"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/buttonDiceCountMinus"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDiceMaximumNumber" />
+
     <TextView
         android:id="@+id/textViewTitleMaximumNumber5"
         android:layout_width="170dp"
@@ -15,7 +38,18 @@
         android:text="Max Value"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitleMaximumNumber4" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextDiceMaximumNumber"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/textViewTitleMaximumNumber5"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTitleMaximumNumber6"
@@ -27,69 +61,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitleMaximumNumber5" />
-
-    <EditText
-        android:id="@+id/editTextDiceMaximumNumber"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewTitleMaximumNumber5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDiceNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleMaximumNumber4" />
 
     <TextView
         android:id="@+id/textViewTitleMaximumNumber4"
-        android:layout_width="170dp"
+        android:layout_width="110dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Dices ⚄"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonGenerateDice"
-        android:layout_width="330dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:onClick="generateRandomNumber"
-        android:text="Generate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRusult" />
-
-    <EditText
-        android:id="@+id/editTextDiceNumber"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewTitleMaximumNumber4"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleMaximumNumber5" />
 
     <FrameLayout
         android:id="@+id/diceLayout"
         android:layout_width="379dp"
         android:layout_height="375dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGenerateDice"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitleMaximumNumber6">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/buttonDiceCountPlus"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="+"
+        app:layout_constraintStart_toEndOf="@+id/editTextDiceNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDiceMaximumNumber" />
+
+    <Button
+        android:id="@+id/buttonDiceCountMinus"
+        android:layout_width="44dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="-"
+        app:layout_constraintStart_toEndOf="@+id/textViewTitleMaximumNumber4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleMaximumNumber5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

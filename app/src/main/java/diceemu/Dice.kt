@@ -7,7 +7,7 @@ import android.widget.TextView
 class Dice(value: Int = 1) {
     private val value = value
 
-    private fun draw(): String {
+    fun draw(): String {
         if (value < 10) return "[ $value ]"
         return "[$value]"
     }
@@ -21,7 +21,7 @@ class Dice(value: Int = 1) {
         )
         params.setMargins(
             10 + (leftPos * 120),
-            60 + (topPos * 120),
+            topPos * 120,
             10,
             10
         )

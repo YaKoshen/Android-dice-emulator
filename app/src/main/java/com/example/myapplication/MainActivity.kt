@@ -20,10 +20,16 @@ class MainActivity : AppCompatActivity() {
 
     private var infoToast = InfoToast(this)
 
+    private fun generateDice(maxNum: Int = DEFAULT_MAX_VALUE) {
+        var diceNum = Calc().randomNumber(maxNum)
+        randomNumber.setText(Dice(diceNum).draw())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Init GUI elements
         maxNumber = findViewById<EditText>(R.id.editTextMaximumNumber)
         randomNumber = findViewById<TextView>(R.id.textViewRusult)
 
@@ -35,6 +41,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(secondActivityIntent)
         }
 
+        // Set defaults
+        maxNumber.setText(DEFAULT_MAX_COUNT.toString())
+        generateDice()
+
+        // Buttons
         buttonGenerate.setOnClickListener {
             var strMaxNum = maxNumber.text.toString()
             var maxNum = strMaxNum.toIntOrNull()
@@ -43,8 +54,11 @@ class MainActivity : AppCompatActivity() {
                 maxNum == null -> {
                     infoToast.error("Please fill Maximum number")
                 }
+                maxNum > MAX_DICE_VALUE -> {
+                    infoToast.error("Value must be less then " + (MAX_DICE_VALUE+1))
+                }
                 else -> {
-                    randomNumber.text = Calc().randomNumber(maxNum).toString()
+                    generateDice(maxNum)
                 }
             }
         }
